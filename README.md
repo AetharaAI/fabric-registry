@@ -1,7 +1,7 @@
 # Fabric A2A Registry
 
 <p align="center">
-  <img src="fabric_a2a/public/logo.png" alt="Fabric Logo" width="250"/>
+  <img src="images/logo.png" alt="Fabric Logo" width="250"/>
 </p>
 
 # Fabric MCP Server - Universal Tool Server & Agent Gateway
