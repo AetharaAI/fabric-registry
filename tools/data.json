@@ -1,0 +1,15 @@
+{
+  "id": "data",
+  "type": "tool-category",
+  "name": "Data Tools",
+  "description": "JSON, CSV, and schema validation operations",
+  "tools": [
+    "data.json",
+    "data.csv",
+    "data.validate"
+  ],
+  "trust_tier": "public",
+  "author": "fabric-core",
+  "status": "active",
+  "manifest": "/tools/data.yaml"
+}

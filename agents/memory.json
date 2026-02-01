@@ -1,0 +1,16 @@
+{
+  "id": "memory",
+  "type": "agent",
+  "name": "Memory Agent",
+  "display_name": "Memory",
+  "description": "Long-term memory and knowledge management",
+  "version": "0.9.0",
+  "runtime": "mcp",
+  "endpoint": "http://localhost:8004/mcp",
+  "capabilities": ["store", "recall"],
+  "tags": ["memory", "storage", "retrieval", "knowledge"],
+  "trust_tier": "local",
+  "author": "fabric-core",
+  "status": "active",
+  "manifest": "/agents/memory.yaml"
+}

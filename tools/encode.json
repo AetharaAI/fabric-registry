@@ -1,0 +1,13 @@
+{
+  "id": "encode",
+  "type": "tool-category",
+  "name": "Encoding Tools",
+  "description": "URL and text encoding operations",
+  "tools": [
+    "encode.url"
+  ],
+  "trust_tier": "public",
+  "author": "fabric-core",
+  "status": "active",
+  "manifest": "/tools/encode.yaml"
+}

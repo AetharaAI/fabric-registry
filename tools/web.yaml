@@ -1,0 +1,126 @@
+# Web Tools
+# Built-in tools for HTTP requests and web operations
+
+category: web
+description: HTTP requests and web page operations
+
+tools:
+  - tool_id: web.http_request
+    display_name: HTTP Request
+    description: Make HTTP requests to any URL
+    provider: builtin
+    category: web
+    capabilities:
+      - name: request
+        description: Perform HTTP GET, POST, PUT, DELETE, PATCH
+        streaming: false
+        modalities: [text]
+        input_schema:
+          type: object
+          properties:
+            url:
+              type: string
+              description: Target URL
+            method:
+              type: string
+              enum: [GET, POST, PUT, DELETE, PATCH]
+              default: GET
+            headers:
+              type: object
+              description: HTTP headers
+            body:
+              type: string
+              description: Request body
+            timeout:
+              type: integer
+              description: Request timeout in milliseconds
+              default: 30000
+          required: [url]
+        output_schema:
+          type: object
+          properties:
+            status_code:
+              type: integer
+            headers:
+              type: object
+            body:
+              type: string
+            elapsed_ms:
+              type: integer
+        max_timeout_ms: 60000
+
+  - tool_id: web.fetch_page
+    display_name: Fetch Web Page
+    description: Fetch and extract readable content from web pages
+    provider: builtin
+    category: web
+    capabilities:
+      - name: fetch
+        description: Extract article text, title, and metadata from HTML
+        streaming: false
+        modalities: [text]
+        input_schema:
+          type: object
+          properties:
+            url:
+              type: string
+              description: Web page URL
+            extract_text:
+              type: boolean
+              description: Extract readable text content
+              default: true
+            max_length:
+              type: integer
+              description: Maximum characters to return
+              default: 50000
+          required: [url]
+        output_schema:
+          type: object
+          properties:
+            title:
+              type: string
+              description: Page title
+            text:
+              type: string
+              description: Extracted text content
+            links:
+              type: array
+              description: Found links
+            metadata:
+              type: object
+              description: Page metadata
+        max_timeout_ms: 30000
+
+  - tool_id: web.parse_url
+    display_name: Parse URL
+    description: Parse and extract components from URLs
+    provider: builtin
+    category: web
+    capabilities:
+      - name: parse
+        description: Break down URL into components
+        streaming: false
+        modalities: [text]
+        input_schema:
+          type: object
+          properties:
+            url:
+              type: string
+              description: URL to parse
+          required: [url]
+        output_schema:
+          type: object
+          properties:
+            scheme:
+              type: string
+            netloc:
+              type: string
+            path:
+              type: string
+            params:
+              type: string
+            query:
+              type: object
+            fragment:
+              type: string
+        max_timeout_ms: 1000

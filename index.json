@@ -1,0 +1,126 @@
+{
+  "registry_version": "1.0",
+  "generated_at": "2026-01-31T23:00:00Z",
+  "base_url": "https://fabric.perceptor.us",
+  "schemas": {
+    "agent": "/schema/agent.schema.json",
+    "tool": "/schema/tool.schema.json",
+    "registry": "/schema/registry.schema.json"
+  },
+  "agents": [
+    {
+      "agent_id": "percy",
+      "path": "/agents/percy.yaml",
+      "meta_path": "/agents/percy.json",
+      "trust_tier": "org",
+      "tags": ["planner", "reasoning", "dev", "analysis"],
+      "status": "active"
+    },
+    {
+      "agent_id": "coder",
+      "path": "/agents/coder.yaml",
+      "meta_path": "/agents/coder.json",
+      "trust_tier": "org",
+      "tags": ["developer", "code", "execution", "review"],
+      "status": "active"
+    },
+    {
+      "agent_id": "vision",
+      "path": "/agents/vision.yaml",
+      "meta_path": "/agents/vision.json",
+      "trust_tier": "org",
+      "tags": ["vision", "image", "multimodal", "generation"],
+      "status": "active"
+    },
+    {
+      "agent_id": "memory",
+      "path": "/agents/memory.yaml",
+      "meta_path": "/agents/memory.json",
+      "trust_tier": "local",
+      "tags": ["memory", "storage", "retrieval", "knowledge"],
+      "status": "active"
+    },
+    {
+      "agent_id": "orchestrator",
+      "path": "/agents/orchestrator.yaml",
+      "meta_path": "/agents/orchestrator.json",
+      "trust_tier": "org",
+      "tags": ["orchestration", "coordination", "workflow", "multi-agent"],
+      "status": "active"
+    }
+  ],
+  "tools": [
+    {
+      "tool_id": "io",
+      "path": "/tools/io.yaml",
+      "meta_path": "/tools/io.json",
+      "category": "io",
+      "trust_tier": "org",
+      "status": "active"
+    },
+    {
+      "tool_id": "web",
+      "path": "/tools/web.yaml",
+      "meta_path": "/tools/web.json",
+      "category": "web",
+      "trust_tier": "org",
+      "status": "active"
+    },
+    {
+      "tool_id": "math",
+      "path": "/tools/math.yaml",
+      "meta_path": "/tools/math.json",
+      "category": "math",
+      "trust_tier": "public",
+      "status": "active"
+    },
+    {
+      "tool_id": "text",
+      "path": "/tools/text.yaml",
+      "meta_path": "/tools/text.json",
+      "category": "text",
+      "trust_tier": "public",
+      "status": "active"
+    },
+    {
+      "tool_id": "system",
+      "path": "/tools/system.yaml",
+      "meta_path": "/tools/system.json",
+      "category": "system",
+      "trust_tier": "local",
+      "status": "active"
+    },
+    {
+      "tool_id": "data",
+      "path": "/tools/data.yaml",
+      "meta_path": "/tools/data.json",
+      "category": "data",
+      "trust_tier": "public",
+      "status": "active"
+    },
+    {
+      "tool_id": "security",
+      "path": "/tools/security.yaml",
+      "meta_path": "/tools/security.json",
+      "category": "security",
+      "trust_tier": "public",
+      "status": "active"
+    },
+    {
+      "tool_id": "encode",
+      "path": "/tools/encode.yaml",
+      "meta_path": "/tools/encode.json",
+      "category": "encoding",
+      "trust_tier": "public",
+      "status": "active"
+    },
+    {
+      "tool_id": "docs",
+      "path": "/tools/docs.yaml",
+      "meta_path": "/tools/docs.json",
+      "category": "docs",
+      "trust_tier": "public",
+      "status": "active"
+    }
+  ]
+}

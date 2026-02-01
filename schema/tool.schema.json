@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fabric.perceptor.us/schema/tool.schema.json",
+  "title": "Fabric A2A Tool Schema",
+  "description": "Schema for Fabric A2A tool manifests",
+  "type": "object",
+  "required": ["category", "tools"],
+  "properties": {
+    "category": {
+      "type": "string",
+      "description": "Tool category identifier"
+    },
+    "description": {
+      "type": "string",
+      "description": "Category description"
+    },
+    "tools": {
+      "type": "array",
+      "description": "List of tools in this category",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["tool_id", "display_name", "description", "provider", "capabilities"],
+        "properties": {
+          "tool_id": {
+            "type": "string",
+            "description": "Unique tool identifier (e.g., io.read_file)"
+          },
+          "display_name": {
+            "type": "string",
+            "description": "Human-readable tool name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Tool description"
+          },
+          "provider": {
+            "type": "string",
+            "enum": ["builtin", "remote"],
+            "description": "Tool provider type"
+          },
+          "category": {
+            "type": "string",
+            "description": "Tool category"
+          },
+          "trust_tier": {
+            "type": "string",
+            "enum": ["local", "org", "public"],
+            "description": "Required trust level to use this tool"
+          },
+          "capabilities": {
+            "type": "array",
+            "description": "Tool capabilities",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["name", "description"],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Capability name"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Capability description"
+                },
+                "streaming": {
+                  "type": "boolean",
+                  "description": "Whether this capability supports streaming",
+                  "default": false
+                },
+                "modalities": {
+                  "type": "array",
+                  "description": "Supported input/output modalities",
+                  "items": {
+                    "type": "string",
+                    "enum": ["text", "image", "audio", "video", "code", "binary"]
+                  }
+                },
+                "input_schema": {
+                  "type": "object",
+                  "description": "JSON Schema for input validation"
+                },
+                "output_schema": {
+                  "type": "object",
+                  "description": "JSON Schema for output validation"
+                },
+                "max_timeout_ms": {
+                  "type": "integer",
+                  "description": "Maximum execution timeout in milliseconds",
+                  "minimum": 100
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

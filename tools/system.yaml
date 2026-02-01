@@ -1,0 +1,105 @@
+# System Tools
+# Built-in tools for system operations
+
+category: system
+description: System execution and environment operations
+
+tools:
+  - tool_id: system.execute
+    display_name: Execute Command
+    description: Execute shell commands safely (sandboxed)
+    provider: builtin
+    category: system
+    trust_tier: local
+    capabilities:
+      - name: exec
+        description: Execute a shell command with timeout and restrictions
+        streaming: true
+        modalities: [text]
+        input_schema:
+          type: object
+          properties:
+            command:
+              type: string
+              description: Shell command to execute
+            working_dir:
+              type: string
+              description: Working directory
+            timeout:
+              type: integer
+              description: Timeout in milliseconds
+              default: 30000
+            env:
+              type: object
+              description: Environment variables
+          required: [command]
+        output_schema:
+          type: object
+          properties:
+            stdout:
+              type: string
+            stderr:
+              type: string
+            exit_code:
+              type: integer
+            duration_ms:
+              type: integer
+        max_timeout_ms: 120000
+
+  - tool_id: system.env
+    display_name: Environment Variables
+    description: Get environment variables
+    provider: builtin
+    category: system
+    capabilities:
+      - name: get
+        description: Read environment variables
+        streaming: false
+        modalities: [text]
+        input_schema:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Variable name (null for all)
+          required: []
+        output_schema:
+          type: object
+          description: Environment variables as key-value pairs
+        max_timeout_ms: 1000
+
+  - tool_id: system.datetime
+    display_name: DateTime
+    description: Get current time, format dates, calculate deltas
+    provider: builtin
+    category: system
+    capabilities:
+      - name: now
+        description: Get current datetime in various formats
+        streaming: false
+        modalities: [text]
+        input_schema:
+          type: object
+          properties:
+            timezone:
+              type: string
+              description: Timezone name
+              default: UTC
+            format:
+              type: string
+              enum: [iso, timestamp, rfc2822, custom]
+              default: iso
+            custom_format:
+              type: string
+              description: Custom strftime format (when format=custom)
+          required: []
+        output_schema:
+          type: object
+          properties:
+            iso:
+              type: string
+            timestamp:
+              type: number
+            formatted:
+              type: string
+        max_timeout_ms: 1000

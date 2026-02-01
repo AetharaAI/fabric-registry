@@ -1,0 +1,15 @@
+{
+  "id": "system",
+  "type": "tool-category",
+  "name": "System Tools",
+  "description": "System execution and environment operations",
+  "tools": [
+    "system.execute",
+    "system.env",
+    "system.datetime"
+  ],
+  "trust_tier": "local",
+  "author": "fabric-core",
+  "status": "active",
+  "manifest": "/tools/system.yaml"
+}

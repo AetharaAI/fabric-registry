@@ -1,0 +1,47 @@
+# Fabric A2A Registry - Git Ignore
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Validation artifacts
+*.validated
+validation-output/
+
+# Temporary files
+*.tmp
+*.bak
+.cache/
+
+# Python (for validation scripts)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+
+# Node (for schema validation)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Don't ignore the actual registry content
+!agents/
+!tools/
+!schema/
+!index.json
+!README.md
+!CONTRIBUTING.md
+!LICENSE

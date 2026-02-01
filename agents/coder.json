@@ -1,0 +1,16 @@
+{
+  "id": "coder",
+  "type": "agent",
+  "name": "Coder Agent",
+  "display_name": "Coder",
+  "description": "Code generation, analysis, and debugging specialist",
+  "version": "2.0.1",
+  "runtime": "mcp",
+  "endpoint": "http://localhost:8002/mcp",
+  "capabilities": ["code", "review"],
+  "tags": ["developer", "code", "execution", "review"],
+  "trust_tier": "org",
+  "author": "fabric-core",
+  "status": "active",
+  "manifest": "/agents/coder.yaml"
+}

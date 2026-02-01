@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fabric.perceptor.us/schema/registry.schema.json",
+  "title": "Fabric A2A Registry Index Schema",
+  "description": "Schema for the Fabric A2A registry index.json",
+  "type": "object",
+  "required": ["registry_version", "generated_at", "schemas", "agents", "tools"],
+  "properties": {
+    "registry_version": {
+      "type": "string",
+      "description": "Registry format version",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of when the index was generated"
+    },
+    "base_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "https://registry.fabric.perceptor.us (for GitHub Pages)"
+    },
+    "schemas": {
+      "type": "object",
+      "required": ["agent", "tool", "registry"],
+      "properties": {
+        "agent": {
+          "type": "string",
+          "format": "uri",
+          "description": "Path to agent schema"
+        },
+        "tool": {
+          "type": "string",
+          "format": "uri",
+          "description": "Path to tool schema"
+        },
+        "registry": {
+          "type": "string",
+          "format": "uri",
+          "description": "Path to registry schema"
+        }
+      }
+    },
+    "agents": {
+      "type": "array",
+      "description": "List of registered agents",
+      "items": {
+        "type": "object",
+        "required": ["agent_id", "path"],
+        "properties": {
+          "agent_id": {
+            "type": "string",
+            "description": "Unique agent identifier"
+          },
+          "path": {
+            "type": "string",
+            "description": "Path to agent manifest (YAML)"
+          },
+          "meta_path": {
+            "type": "string",
+            "description": "Path to agent metadata (JSON)"
+          },
+          "trust_tier": {
+            "type": "string",
+            "enum": ["local", "org", "public"]
+          },
+          "tags": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "status": {
+            "type": "string",
+            "enum": ["active", "deprecated", "experimental"],
+            "default": "active"
+          }
+        }
+      }
+    },
+    "tools": {
+      "type": "array",
+      "description": "List of registered tools",
+      "items": {
+        "type": "object",
+        "required": ["tool_id", "path"],
+        "properties": {
+          "tool_id": {
+            "type": "string",
+            "description": "Unique tool identifier"
+          },
+          "path": {
+            "type": "string",
+            "description": "Path to tool manifest (YAML)"
+          },
+          "meta_path": {
+            "type": "string",
+            "description": "Path to tool metadata (JSON)"
+          },
+          "category": {
+            "type": "string",
+            "description": "Tool category"
+          },
+          "trust_tier": {
+            "type": "string",
+            "enum": ["local", "org", "public"]
+          },
+          "status": {
+            "type": "string",
+            "enum": ["active", "deprecated", "experimental"],
+            "default": "active"
+          }
+        }
+      }
+    }
+  }
+}

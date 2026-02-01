@@ -1,0 +1,14 @@
+{
+  "id": "math",
+  "type": "tool-category",
+  "name": "Math Tools",
+  "description": "Mathematical calculations and statistical analysis",
+  "tools": [
+    "math.calculate",
+    "math.statistics"
+  ],
+  "trust_tier": "public",
+  "author": "fabric-core",
+  "status": "active",
+  "manifest": "/tools/math.yaml"
+}

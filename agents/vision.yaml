@@ -1,0 +1,78 @@
+# Vision Agent
+# Image analysis, generation, and visual understanding
+
+agent_id: vision
+node_id: vision-node-1
+delegate_id: "uuid-vision-delegate"
+cog_id: "uuid-vision-cog"
+realm: "master"
+display_name: Vision
+version: 1.0.0
+description: Image analysis, generation, and visual understanding
+runtime: agentzero
+
+endpoint:
+  transport: http
+  uri: http://localhost:8003/agent
+
+capabilities:
+  - name: analyze_image
+    description: Analyze and describe images
+    streaming: false
+    modalities: [image, text]
+    input_schema:
+      type: object
+      properties:
+        image_url:
+          type: string
+          description: URL or path to image
+        task:
+          type: string
+          description: Analysis task or question
+      required: [image_url, task]
+    output_schema:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Image description
+        objects:
+          type: array
+          description: Detected objects
+        metadata:
+          type: object
+          description: Image metadata
+    max_timeout_ms: 30000
+
+  - name: generate_image
+    description: Generate images from text descriptions
+    streaming: false
+    modalities: [text, image]
+    input_schema:
+      type: object
+      properties:
+        prompt:
+          type: string
+          description: Image generation prompt
+        style:
+          type: string
+          description: Art style or aesthetic
+        size:
+          type: string
+          description: Image dimensions
+      required: [prompt]
+    output_schema:
+      type: object
+      properties:
+        image_url:
+          type: string
+          description: Generated image URL
+        metadata:
+          type: object
+          description: Generation metadata
+    max_timeout_ms: 60000
+
+tags: [vision, image, multimodal, generation]
+trust_tier: org
+author: fabric-core
+license: MIT

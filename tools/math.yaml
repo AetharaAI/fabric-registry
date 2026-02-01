@@ -1,0 +1,80 @@
+# Math Tools
+# Built-in tools for mathematical calculations
+
+category: math
+description: Mathematical calculations and statistical analysis
+
+tools:
+  - tool_id: math.calculate
+    display_name: Calculator
+    description: Perform mathematical calculations safely
+    provider: builtin
+    category: math
+    capabilities:
+      - name: eval
+        description: Evaluate mathematical expressions safely
+        streaming: false
+        modalities: [text]
+        input_schema:
+          type: object
+          properties:
+            expression:
+              type: string
+              description: Mathematical expression (e.g., "(2 + 3) * 4")
+            precision:
+              type: integer
+              description: Decimal precision
+              default: 10
+          required: [expression]
+        output_schema:
+          type: object
+          properties:
+            result:
+              type: number
+            expression:
+              type: string
+        max_timeout_ms: 5000
+
+  - tool_id: math.statistics
+    display_name: Statistics
+    description: Calculate statistical measures on datasets
+    provider: builtin
+    category: math
+    capabilities:
+      - name: analyze
+        description: Calculate mean, median, stddev, min, max
+        streaming: false
+        modalities: [text]
+        input_schema:
+          type: object
+          properties:
+            data:
+              type: array
+              items:
+                type: number
+              description: Dataset
+            measures:
+              type: array
+              items:
+                type: string
+                enum: [mean, median, stddev, min, max, count, sum]
+              default: [mean, median, stddev, min, max]
+          required: [data]
+        output_schema:
+          type: object
+          properties:
+            mean:
+              type: number
+            median:
+              type: number
+            stddev:
+              type: number
+            min:
+              type: number
+            max:
+              type: number
+            count:
+              type: integer
+            sum:
+              type: number
+        max_timeout_ms: 10000

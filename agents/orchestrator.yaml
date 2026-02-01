@@ -1,0 +1,55 @@
+# Orchestrator Agent
+# Multi-agent coordination and workflow execution
+
+agent_id: orchestrator
+node_id: orchestrator-node-1
+delegate_id: "uuid-orchestrator-delegate"
+cog_id: "uuid-orchestrator-cog"
+realm: "master"
+display_name: Orchestrator
+version: 1.5.0
+description: Multi-agent coordination and workflow execution
+runtime: mcp
+
+endpoint:
+  transport: http
+  uri: http://localhost:8005/mcp
+
+capabilities:
+  - name: coordinate
+    description: Coordinate multiple agents to complete complex tasks
+    streaming: true
+    modalities: [text]
+    input_schema:
+      type: object
+      properties:
+        goal:
+          type: string
+          description: High-level goal
+        available_agents:
+          type: array
+          items:
+            type: string
+          description: List of agent IDs to coordinate
+        constraints:
+          type: object
+          description: Execution constraints
+      required: [goal]
+    output_schema:
+      type: object
+      properties:
+        execution_plan:
+          type: object
+          description: Coordination plan
+        results:
+          type: array
+          description: Results from each agent
+        summary:
+          type: string
+          description: Overall summary
+    max_timeout_ms: 300000
+
+tags: [orchestration, coordination, workflow, multi-agent]
+trust_tier: org
+author: fabric-core
+license: MIT

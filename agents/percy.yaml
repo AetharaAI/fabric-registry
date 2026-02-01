@@ -1,0 +1,81 @@
+# Percy Agent
+# General reasoning and planning agent with strong analytical capabilities
+
+agent_id: percy
+node_id: percy-node-1
+delegate_id: "uuid-percy-delegate"
+cog_id: "uuid-percy-cog"
+realm: "master"
+display_name: Percy
+version: 1.2.0
+description: General reasoning and planning agent with strong analytical capabilities
+runtime: mcp
+
+endpoint:
+  transport: http
+  uri: http://localhost:8001/mcp
+
+capabilities:
+  - name: reason
+    description: General reasoning, analysis, and problem-solving
+    streaming: true
+    modalities: [text]
+    input_schema:
+      type: object
+      properties:
+        task:
+          type: string
+          description: The reasoning task or question
+        context:
+          type: object
+          description: Additional context for reasoning
+        constraints:
+          type: object
+          description: Constraints or requirements
+      required: [task]
+    output_schema:
+      type: object
+      properties:
+        answer:
+          type: string
+          description: The reasoning result
+        reasoning_steps:
+          type: array
+          description: Step-by-step reasoning process
+        confidence:
+          type: number
+          description: Confidence score 0-1
+        citations:
+          type: array
+          description: Sources or references used
+    max_timeout_ms: 120000
+
+  - name: plan
+    description: Multi-step planning and task decomposition
+    streaming: true
+    modalities: [text]
+    input_schema:
+      type: object
+      properties:
+        goal:
+          type: string
+          description: The goal to plan for
+        constraints:
+          type: object
+          description: Planning constraints
+      required: [goal]
+    output_schema:
+      type: object
+      properties:
+        plan:
+          type: array
+          description: Ordered list of steps
+        dependencies:
+          type: object
+          description: Step dependencies
+    max_timeout_ms: 90000
+
+tags: [planner, reasoning, dev, analysis]
+trust_tier: org
+author: fabric-core
+license: MIT

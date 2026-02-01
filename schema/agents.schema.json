@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fabric.perceptor.us/schema/agent.schema.json",
+  "title": "Fabric A2A Agent Schema",
+  "description": "Schema for Fabric A2A agent manifests",
+  "type": "object",
+  "required": ["agent_id", "display_name", "version", "description", "endpoint", "capabilities"],
+  "properties": {
+    "agent_id": {
+      "type": "string",
+      "description": "Unique agent identifier"
+    },
+    "node_id": {
+      "type": "string",
+      "description": "Node identifier for deployment"
+    },
+    "delegate_id": {
+      "type": "string",
+      "description": "Delegate UUID"
+    },
+    "cog_id": {
+      "type": "string",
+      "description": "Cog UUID"
+    },
+    "realm": {
+      "type": "string",
+      "description": "Deployment realm"
+    },
+    "display_name": {
+      "type": "string",
+      "description": "Human-readable agent name"
+    },
+    "version": {
+      "type": "string",
+      "description": "Agent version (semver)",
+      "pattern": "^\\d+\\.\\d+\\.\\d+"
+    },
+    "description": {
+      "type": "string",
+      "description": "Agent description"
+    },
+    "runtime": {
+      "type": "string",
+      "enum": ["mcp", "agentzero", "custom"],
+      "description": "Agent runtime type"
+    },
+    "endpoint": {
+      "type": "object",
+      "required": ["transport", "uri"],
+      "properties": {
+        "transport": {
+          "type": "string",
+          "enum": ["http", "https", "ws", "wss", "local", "stdio"],
+          "description": "Transport protocol"
+        },
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "Endpoint URI"
+        }
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "description": "Agent capabilities",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "description"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Capability name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Capability description"
+          },
+          "streaming": {
+            "type": "boolean",
+            "description": "Whether this capability supports streaming",
+            "default": false
+          },
+          "modalities": {
+            "type": "array",
+            "description": "Supported input/output modalities",
+            "items": {
+              "type": "string",
+              "enum": ["text", "image", "audio", "video", "code"]
+            }
+          },
+          "input_schema": {
+            "type": "object",
+            "description": "JSON Schema for input validation"
+          },
+          "output_schema": {
+            "type": "object",
+            "description": "JSON Schema for output validation"
+          },
+          "max_timeout_ms": {
+            "type": "integer",
+            "description": "Maximum execution timeout in milliseconds",
+            "minimum": 1000
+          }
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "description": "Agent tags for categorization",
+      "items": { "type": "string" }
+    },
+    "trust_tier": {
+      "type": "string",
+      "enum": ["local", "org", "public"],
+      "description": "Required trust level to use this agent"
+    },
+    "author": {
+      "type": "string",
+      "description": "Agent author or organization"
+    },
+    "license": {
+      "type": "string",
+      "description": "License identifier"
+    },
+    "homepage": {
+      "type": "string",
+      "format": "uri",
+      "description": "Agent homepage URL"
+    },
+    "documentation": {
+      "type": "string",
+      "format": "uri",
+      "description": "Documentation URL"
+    }
+  }
+}

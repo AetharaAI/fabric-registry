@@ -1,0 +1,81 @@
+# Coder Agent
+# Code generation, analysis, and debugging specialist
+
+agent_id: coder
+node_id: coder-node-1
+delegate_id: "uuid-coder-delegate"
+cog_id: "uuid-coder-cog"
+realm: "master"
+display_name: Coder
+version: 2.0.1
+description: Code generation, analysis, and debugging specialist
+runtime: mcp
+
+endpoint:
+  transport: http
+  uri: http://localhost:8002/mcp
+
+capabilities:
+  - name: code
+    description: Generate, analyze, and debug code
+    streaming: true
+    modalities: [text, code]
+    input_schema:
+      type: object
+      properties:
+        task:
+          type: string
+          description: The coding task
+        language:
+          type: string
+          description: Programming language
+        context:
+          type: object
+          description: Code context or existing codebase
+      required: [task]
+    output_schema:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Generated or modified code
+        explanation:
+          type: string
+          description: Explanation of the code
+        tests:
+          type: string
+          description: Test cases
+    max_timeout_ms: 180000
+
+  - name: review
+    description: Code review and quality analysis
+    streaming: false
+    modalities: [text, code]
+    input_schema:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Code to review
+        language:
+          type: string
+          description: Programming language
+      required: [code]
+    output_schema:
+      type: object
+      properties:
+        issues:
+          type: array
+          description: List of issues found
+        suggestions:
+          type: array
+          description: Improvement suggestions
+        score:
+          type: number
+          description: Quality score 0-100
+    max_timeout_ms: 60000
+
+tags: [developer, code, execution, review]
+trust_tier: org
+author: fabric-core
+license: MIT

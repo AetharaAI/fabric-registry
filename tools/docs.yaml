@@ -1,0 +1,41 @@
+# Documentation Tools
+# Built-in tools for documentation processing
+
+category: docs
+description: Markdown and documentation processing
+
+tools:
+  - tool_id: docs.markdown
+    display_name: Markdown Processor
+    description: Convert Markdown to HTML and extract structure
+    provider: builtin
+    category: docs
+    capabilities:
+      - name: process
+        description: Parse markdown and extract sections, convert to HTML
+        streaming: false
+        modalities: [text]
+        input_schema:
+          type: object
+          properties:
+            markdown:
+              type: string
+              description: Markdown content to process
+            extract_toc:
+              type: boolean
+              description: Extract table of contents
+              default: true
+          required: [markdown]
+        output_schema:
+          type: object
+          properties:
+            html:
+              type: string
+              description: Converted HTML
+            toc:
+              type: array
+              description: Table of contents
+            headings:
+              type: array
+              description: All headings found
+        max_timeout_ms: 10000

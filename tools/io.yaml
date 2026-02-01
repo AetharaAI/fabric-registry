@@ -1,0 +1,159 @@
+# File System Tools
+# Built-in tools for file I/O operations
+
+category: io
+description: File system and I/O operations
+
+tools:
+  - tool_id: io.read_file
+    display_name: Read File
+    description: Read contents of a text file
+    provider: builtin
+    category: io
+    capabilities:
+      - name: read
+        description: Read file contents with optional line limits
+        streaming: false
+        modalities: [text]
+        input_schema:
+          type: object
+          properties:
+            path:
+              type: string
+              description: Absolute or relative file path
+            max_lines:
+              type: integer
+              description: Maximum lines to read
+              default: null
+            encoding:
+              type: string
+              description: File encoding
+              default: utf-8
+          required: [path]
+        output_schema:
+          type: object
+          properties:
+            content:
+              type: string
+              description: File contents
+            line_count:
+              type: integer
+            truncated:
+              type: boolean
+        max_timeout_ms: 10000
+
+  - tool_id: io.write_file
+    display_name: Write File
+    description: Write content to a file (creates directories if needed)
+    provider: builtin
+    category: io
+    capabilities:
+      - name: write
+        description: Write text to a file
+        streaming: false
+        modalities: [text]
+        input_schema:
+          type: object
+          properties:
+            path:
+              type: string
+              description: File path
+            content:
+              type: string
+              description: Content to write
+            append:
+              type: boolean
+              description: Append to existing file
+              default: false
+          required: [path, content]
+        output_schema:
+          type: object
+          properties:
+            bytes_written:
+              type: integer
+            path:
+              type: string
+        max_timeout_ms: 10000
+
+  - tool_id: io.list_directory
+    display_name: List Directory
+    description: List files and directories
+    provider: builtin
+    category: io
+    capabilities:
+      - name: list
+        description: List directory contents with filtering
+        streaming: false
+        modalities: [text]
+        input_schema:
+          type: object
+          properties:
+            path:
+              type: string
+              description: Directory path
+              default: "."
+            recursive:
+              type: boolean
+              description: List recursively
+              default: false
+            pattern:
+              type: string
+              description: Glob pattern filter (e.g., '*.py')
+          required: []
+        output_schema:
+          type: object
+          properties:
+            entries:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  type:
+                    type: string
+                    enum: [file, directory]
+                  size:
+                    type: integer
+                  modified:
+                    type: string
+        max_timeout_ms: 5000
+
+  - tool_id: io.search_files
+    display_name: Search Files
+    description: Search file contents using regex
+    provider: builtin
+    category: io
+    capabilities:
+      - name: search
+        description: Search file contents using regex pattern
+        streaming: true
+        modalities: [text]
+        input_schema:
+          type: object
+          properties:
+            path:
+              type: string
+              description: Directory to search
+            pattern:
+              type: string
+              description: Regex pattern to search for
+            file_pattern:
+              type: string
+              description: Restrict to files matching glob pattern
+          required: [path, pattern]
+        output_schema:
+          type: object
+          properties:
+            matches:
+              type: array
+              items:
+                type: object
+                properties:
+                  file:
+                    type: string
+                  line:
+                    type: integer
+                  content:
+                    type: string
+        max_timeout_ms: 30000

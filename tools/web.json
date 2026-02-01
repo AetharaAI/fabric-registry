@@ -1,0 +1,15 @@
+{
+  "id": "web",
+  "type": "tool-category",
+  "name": "Web Tools",
+  "description": "HTTP requests and web page operations",
+  "tools": [
+    "web.http_request",
+    "web.fetch_page",
+    "web.parse_url"
+  ],
+  "trust_tier": "org",
+  "author": "fabric-core",
+  "status": "active",
+  "manifest": "/tools/web.yaml"
+}

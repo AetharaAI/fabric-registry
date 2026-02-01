@@ -1,0 +1,15 @@
+{
+  "id": "text",
+  "type": "tool-category",
+  "name": "Text Tools",
+  "description": "Text processing, regex, and transformation operations",
+  "tools": [
+    "text.regex",
+    "text.transform",
+    "text.diff"
+  ],
+  "trust_tier": "public",
+  "author": "fabric-core",
+  "status": "active",
+  "manifest": "/tools/text.yaml"
+}

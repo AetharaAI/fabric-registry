@@ -1,0 +1,16 @@
+{
+  "id": "percy",
+  "type": "agent",
+  "name": "Percy Reason Agent",
+  "display_name": "Percy",
+  "description": "General reasoning and planning agent with strong analytical capabilities",
+  "version": "1.2.0",
+  "runtime": "mcp",
+  "endpoint": "http://localhost:8001/mcp",
+  "capabilities": ["reason", "plan"],
+  "tags": ["planner", "reasoning", "dev", "analysis"],
+  "trust_tier": "org",
+  "author": "fabric-core",
+  "status": "active",
+  "manifest": "/agents/percy.yaml"
+}

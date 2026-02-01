@@ -1,0 +1,80 @@
+# Memory Agent
+# Long-term memory and knowledge management
+
+agent_id: memory
+node_id: memory-node-1
+delegate_id: "uuid-memory-delegate"
+cog_id: "uuid-memory-cog"
+realm: "master"
+display_name: Memory
+version: 0.9.0
+description: Long-term memory and knowledge management
+runtime: mcp
+
+endpoint:
+  transport: http
+  uri: http://localhost:8004/mcp
+
+capabilities:
+  - name: store
+    description: Store information in long-term memory
+    streaming: false
+    modalities: [text]
+    input_schema:
+      type: object
+      properties:
+        content:
+          type: string
+          description: Content to store
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags for retrieval
+        metadata:
+          type: object
+          description: Additional metadata
+      required: [content]
+    output_schema:
+      type: object
+      properties:
+        memory_id:
+          type: string
+          description: Unique memory identifier
+        stored_at:
+          type: string
+          description: Timestamp
+    max_timeout_ms: 10000
+
+  - name: recall
+    description: Retrieve information from memory
+    streaming: false
+    modalities: [text]
+    input_schema:
+      type: object
+      properties:
+        query:
+          type: string
+          description: Search query
+        limit:
+          type: integer
+          description: Max results to return
+        filters:
+          type: object
+          description: Filter criteria
+      required: [query]
+    output_schema:
+      type: object
+      properties:
+        results:
+          type: array
+          description: Retrieved memories
+        relevance_scores:
+          type: array
+          description: Relevance scores for each result
+    max_timeout_ms: 15000
+
+tags: [memory, storage, retrieval, knowledge]
+trust_tier: local
+author: fabric-core
+license: MIT

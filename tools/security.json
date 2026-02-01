@@ -1,0 +1,14 @@
+{
+  "id": "security",
+  "type": "tool-category",
+  "name": "Security Tools",
+  "description": "Cryptographic hashing and encoding operations",
+  "tools": [
+    "security.hash",
+    "security.base64"
+  ],
+  "trust_tier": "public",
+  "author": "fabric-core",
+  "status": "active",
+  "manifest": "/tools/security.yaml"
+}

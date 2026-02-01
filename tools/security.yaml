@@ -1,0 +1,66 @@
+# Security Tools
+# Built-in tools for cryptographic operations
+
+category: security
+description: Cryptographic hashing and encoding operations
+
+tools:
+  - tool_id: security.hash
+    display_name: Hash Generator
+    description: Generate cryptographic hashes
+    provider: builtin
+    category: security
+    capabilities:
+      - name: hash
+        description: Compute MD5, SHA1, SHA256, SHA512 hashes
+        streaming: false
+        modalities: [text]
+        input_schema:
+          type: object
+          properties:
+            data:
+              type: string
+              description: Data to hash
+            algorithm:
+              type: string
+              enum: [md5, sha1, sha256, sha512]
+              default: sha256
+          required: [data]
+        output_schema:
+          type: object
+          properties:
+            hash:
+              type: string
+              description: Hex-encoded hash
+            algorithm:
+              type: string
+        max_timeout_ms: 5000
+
+  - tool_id: security.base64
+    display_name: Base64 Codec
+    description: Encode/decode base64
+    provider: builtin
+    category: security
+    capabilities:
+      - name: encode
+        description: Encode string to base64 or decode from base64
+        streaming: false
+        modalities: [text]
+        input_schema:
+          type: object
+          properties:
+            data:
+              type: string
+              description: Data to encode or decode
+            decode:
+              type: boolean
+              description: Set to true to decode instead of encode
+              default: false
+          required: [data]
+        output_schema:
+          type: object
+          properties:
+            result:
+              type: string
+              description: Encoded or decoded result
+        max_timeout_ms: 1000

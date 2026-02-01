@@ -1,0 +1,16 @@
+{
+  "id": "io",
+  "type": "tool-category",
+  "name": "I/O Tools",
+  "description": "File system and I/O operations",
+  "tools": [
+    "io.read_file",
+    "io.write_file",
+    "io.list_directory",
+    "io.search_files"
+  ],
+  "trust_tier": "org",
+  "author": "fabric-core",
+  "status": "active",
+  "manifest": "/tools/io.yaml"
+}

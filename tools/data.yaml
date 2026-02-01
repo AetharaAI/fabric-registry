@@ -1,0 +1,106 @@
+# Data Processing Tools
+# Built-in tools for data manipulation
+
+category: data
+description: JSON, CSV, and schema validation operations
+
+tools:
+  - tool_id: data.json
+    display_name: JSON Processor
+    description: Parse, validate, and query JSON
+    provider: builtin
+    category: data
+    capabilities:
+      - name: parse
+        description: Parse JSON string and optionally query with JSONPath
+        streaming: false
+        modalities: [text]
+        input_schema:
+          type: object
+          properties:
+            json:
+              type: string
+              description: JSON string to parse
+            query:
+              type: string
+              description: JSONPath query (optional)
+          required: [json]
+        output_schema:
+          type: object
+          properties:
+            data:
+              type: object
+              description: Parsed data
+            valid:
+              type: boolean
+            error:
+              type: string
+        max_timeout_ms: 5000
+
+  - tool_id: data.csv
+    display_name: CSV Processor
+    description: Parse and generate CSV data
+    provider: builtin
+    category: data
+    capabilities:
+      - name: parse
+        description: Parse CSV to array of objects
+        streaming: false
+        modalities: [text]
+        input_schema:
+          type: object
+          properties:
+            csv:
+              type: string
+              description: CSV string to parse
+            delimiter:
+              type: string
+              description: Field delimiter
+              default: ","
+            headers:
+              type: boolean
+              description: First row contains headers
+              default: true
+          required: [csv]
+        output_schema:
+          type: object
+          properties:
+            rows:
+              type: array
+              description: Parsed rows
+            headers:
+              type: array
+              description: Column headers
+            row_count:
+              type: integer
+        max_timeout_ms: 10000
+
+  - tool_id: data.validate
+    display_name: Schema Validator
+    description: Validate data against JSON Schema
+    provider: builtin
+    category: data
+    capabilities:
+      - name: validate
+        description: Validate data and return errors if invalid
+        streaming: false
+        modalities: [text]
+        input_schema:
+          type: object
+          properties:
+            data:
+              type: object
+              description: Data to validate
+            schema:
+              type: object
+              description: JSON Schema
+          required: [data, schema]
+        output_schema:
+          type: object
+          properties:
+            valid:
+              type: boolean
+            errors:
+              type: array
+              description: Validation errors
+        max_timeout_ms: 5000

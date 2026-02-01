@@ -1,0 +1,16 @@
+{
+  "id": "vision",
+  "type": "agent",
+  "name": "Vision Agent",
+  "display_name": "Vision",
+  "description": "Image analysis, generation, and visual understanding",
+  "version": "1.0.0",
+  "runtime": "agentzero",
+  "endpoint": "http://localhost:8003/agent",
+  "capabilities": ["analyze_image", "generate_image"],
+  "tags": ["vision", "image", "multimodal", "generation"],
+  "trust_tier": "org",
+  "author": "fabric-core",
+  "status": "active",
+  "manifest": "/agents/vision.yaml"
+}

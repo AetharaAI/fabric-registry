@@ -1,0 +1,126 @@
+# Text Processing Tools
+# Built-in tools for text manipulation and analysis
+
+category: text
+description: Text processing, regex, and transformation operations
+
+tools:
+  - tool_id: text.regex
+    display_name: Regex Operations
+    description: Pattern matching and text extraction with regex
+    provider: builtin
+    category: text
+    capabilities:
+      - name: match
+        description: Find all matches of a regex pattern
+        streaming: false
+        modalities: [text]
+        input_schema:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to search
+            pattern:
+              type: string
+              description: Regex pattern
+            flags:
+              type: array
+              items:
+                type: string
+                enum: [i, m, s, x]
+              description: Regex flags
+          required: [text, pattern]
+        output_schema:
+          type: object
+          properties:
+            matches:
+              type: array
+              description: All matches found
+            groups:
+              type: array
+              description: Captured groups
+            count:
+              type: integer
+              description: Number of matches
+        max_timeout_ms: 5000
+
+  - tool_id: text.transform
+    display_name: Text Transform
+    description: Case conversion, truncation, formatting
+    provider: builtin
+    category: text
+    capabilities:
+      - name: transform
+        description: Transform text (uppercase, lowercase, truncate, etc.)
+        streaming: false
+        modalities: [text]
+        input_schema:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Input text
+            operations:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    enum: [uppercase, lowercase, truncate, trim, replace, split, join]
+                  args:
+                    type: object
+                    description: Operation-specific arguments
+              description: List of operations to apply
+          required: [text, operations]
+        output_schema:
+          type: object
+          properties:
+            result:
+              type: string
+              description: Transformed text
+            operations_applied:
+              type: integer
+        max_timeout_ms: 5000
+
+  - tool_id: text.diff
+    display_name: Text Diff
+    description: Compare two texts and show differences
+    provider: builtin
+    category: text
+    capabilities:
+      - name: compare
+        description: Show line-by-line diff between two texts
+        streaming: false
+        modalities: [text]
+        input_schema:
+          type: object
+          properties:
+            original:
+              type: string
+              description: Original text
+            modified:
+              type: string
+              description: Modified text
+            context_lines:
+              type: integer
+              description: Number of context lines
+              default: 3
+          required: [original, modified]
+        output_schema:
+          type: object
+          properties:
+            diff:
+              type: string
+              description: Unified diff output
+            added:
+              type: integer
+              description: Lines added
+            removed:
+              type: integer
+              description: Lines removed
+            unchanged:
+              type: integer
+              description: Lines unchanged
+        max_timeout_ms: 10000

@@ -1,0 +1,35 @@
+# Encoding Tools
+# Built-in tools for encoding operations
+
+category: encoding
+description: URL and text encoding operations
+
+tools:
+  - tool_id: encode.url
+    display_name: URL Encoder
+    description: URL encode/decode strings
+    provider: builtin
+    category: encoding
+    capabilities:
+      - name: encode
+        description: URL encode or decode strings
+        streaming: false
+        modalities: [text]
+        input_schema:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to encode or decode
+            decode:
+              type: boolean
+              description: Set to true to decode instead of encode
+              default: false
+          required: [text]
+        output_schema:
+          type: object
+          properties:
+            result:
+              type: string
+              description: Encoded or decoded result
+        max_timeout_ms: 1000

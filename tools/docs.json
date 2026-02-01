@@ -1,0 +1,13 @@
+{
+  "id": "docs",
+  "type": "tool-category",
+  "name": "Documentation Tools",
+  "description": "Markdown and documentation processing",
+  "tools": [
+    "docs.markdown"
+  ],
+  "trust_tier": "public",
+  "author": "fabric-core",
+  "status": "active",
+  "manifest": "/tools/docs.yaml"
+}

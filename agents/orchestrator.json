@@ -1,0 +1,16 @@
+{
+  "id": "orchestrator",
+  "type": "agent",
+  "name": "Orchestrator Agent",
+  "display_name": "Orchestrator",
+  "description": "Multi-agent coordination and workflow execution",
+  "version": "1.5.0",
+  "runtime": "mcp",
+  "endpoint": "http://localhost:8005/mcp",
+  "capabilities": ["coordinate"],
+  "tags": ["orchestration", "coordination", "workflow", "multi-agent"],
+  "trust_tier": "org",
+  "author": "fabric-core",
+  "status": "active",
+  "manifest": "/agents/orchestrator.yaml"
+}
